@@ -11,6 +11,7 @@ import com.mycompany.account.repository.AccountRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -57,6 +58,7 @@ public class AccountServiceImplUTest {
         Account accountToUpdate = getExpectedAccount();
         accountToUpdate.setFirstLineAddress("New First Line Address");
 
+        Mockito.when(accountRepository.findAccount(Matchers.anyInt())).thenReturn(accountToUpdate);
         Mockito.doNothing().when(accountRepository).saveAccount(accountToUpdate);
 
         classInTest.updateAccount(accountToUpdate);
@@ -64,13 +66,27 @@ public class AccountServiceImplUTest {
         Mockito.verify(accountRepository, Mockito.times(1)).saveAccount(accountToUpdate);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void givenNoExistingAccountFound_whenUpdateAccount_thenShouldThrowRuntimeException() {
+        Mockito.when(accountRepository.findAccount(Matchers.anyInt())).thenReturn(null);
+
+        classInTest.updateAccount(getExpectedAccount());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void givenNoExistingAccountFound_whenDeleteAccount_thenShouldThrowRuntimeException() {
+        Mockito.when(accountRepository.findAccount(Matchers.anyInt())).thenReturn(null);
+
+        classInTest.deleteAccount(1);
+    }
 
     @Test
     public void testDeleteAccount(){
         int accountId = 1;
 
         Account expectedAccountToBeDeleted = getExpectedAccount();
-
+        
+        Mockito.when(accountRepository.findAccount(Matchers.anyInt())).thenReturn(expectedAccountToBeDeleted);
         Mockito.doNothing().when(accountRepository).removeAccount(expectedAccountToBeDeleted);
 
         classInTest.deleteAccount(accountId);
