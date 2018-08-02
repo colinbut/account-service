@@ -8,5 +8,5 @@ package com.mycompany.account.messaging.event;
 public enum UserEventType {
     CREATED,
     UPDATED,
-    DELETED
+    DELETED;
 }
