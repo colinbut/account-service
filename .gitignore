@@ -13,7 +13,8 @@
 
 .settings/*
 .idea/*
-target/* 
+target/*
+.vscode/*
 
 # Packages #
 ############
