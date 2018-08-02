@@ -5,6 +5,7 @@
  */
 package com.mycompany.account.messaging;
 
+import com.mycompany.account.messaging.event.AddressDto;
 import com.mycompany.account.messaging.event.UserDto;
 import com.mycompany.account.messaging.event.UserEvent;
 import com.mycompany.account.messaging.event.UserEventType;
@@ -49,6 +50,18 @@ public class UserEventReceiver implements MessageListener {
 
     private Account fromUserToAccount(UserDto userDto) {
         Account account = new Account();
+        account.setSsn(userDto.getSsn());
+        account.setForename(userDto.getFirstname());
+        account.setSurname(userDto.getSecondname());
+        account.setDate_of_birth(userDto.getDob());
+        
+        AddressDto addressDto = userDto.getAddress();
+        account.setFirstLineAddress(addressDto.getFirstlineAddress());
+        account.setSecondLineAddress(addressDto.getSecondlineAddress());
+        account.setPostCode(addressDto.getPostcode());
+        account.setCity(addressDto.getCity());
+        account.setCountry(addressDto.getCountry());
+        
         return account;
     }
 }
