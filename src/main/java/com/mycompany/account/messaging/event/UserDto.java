@@ -16,6 +16,7 @@ public class UserDto {
     private String firstname;
     private String secondname;
     private Date dob;
+    private String email;
     private AddressDto address;
 
     public String getSsn() {
@@ -50,6 +51,14 @@ public class UserDto {
         this.dob = dob;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public AddressDto getAddress() {
         return address;
     }
@@ -75,6 +84,7 @@ public class UserDto {
             .append(firstname, userDto.firstname)
             .append(secondname, userDto.secondname)
             .append(dob, userDto.dob)
+            .append(email, userDto.email)
             .append(address, userDto.address)
             .isEquals();
     }
@@ -86,6 +96,7 @@ public class UserDto {
             .append(firstname)
             .append(secondname)
             .append(dob)
+            .append(email)
             .append(address)
             .toHashCode();
     }
@@ -97,6 +108,7 @@ public class UserDto {
             .append("firstname", firstname)
             .append("secondname", secondname)
             .append("dob", dob)
+            .append("email", email)
             .append("address", address)
             .toString();
     }
