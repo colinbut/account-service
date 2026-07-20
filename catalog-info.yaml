@@ -2,6 +2,9 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: "account-service"
+  description: Microservice for managing accounts
+  tags:
+    - java
 spec:
   type: service
   owner: user:guest
